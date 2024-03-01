@@ -244,7 +244,7 @@ function attack() {
       defeatMonster();
     }
   }
-  if (Math.random() <= 0.1 && inventory.length !== 1) {
+  if (Math.random() <= 0.07 && inventory.length !== 1) {
     text.innerText += " Оружие " + inventory.pop() + " сломалось.";
     currentWeapon--;
   }
@@ -295,7 +295,7 @@ function restart() {
   health = 100;
   gold = 50;
   currentWeapon = 0;
-  inventory = ["stick"];
+  inventory = ["палка"];
   goldText.innerText = gold;
   healthText.innerText = health;
   xpText.innerText = xp;
