@@ -20,7 +20,7 @@ const weapons = [
   { name: "палка", power: 5 },
   { name: "кинжал", power: 30 },
   { name: "молот", power: 50 },
-  { name: "мечь", power: 100 },
+  { name: "меч", power: 100 },
 ];
 const monsters = [
   {
