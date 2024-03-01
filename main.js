@@ -5,6 +5,14 @@ let currentWeapon = 0;
 let fighting;
 let monsterHealth;
 let inventory = ["палка"];
+let soundWin = new Audio("/sound/win.mp3");
+let soundLose = new Audio("/sound/lose.mp3");
+let buyItem = new Audio("/sound/coins.mp3");
+let steps = new Audio("/sound/steps.mp3");
+let fight = new Audio("/sound/fight.mp3");
+let killChort = new Audio("/sound/killChort.mp3");
+let killGhoul = new Audio("/sound/killGhoul.mp3");
+let atack = new Audio("/sound/atack.mp3");
 
 const button1 = document.querySelector("#button1");
 const button2 = document.querySelector("#button2");
@@ -118,18 +126,26 @@ function update(location) {
 
 function goTown() {
   update(locations[0]);
+  steps.volume = 0.5;
+  steps.play();
 }
 
 function goStore() {
   update(locations[1]);
+  steps.volume = 0.5;
+  steps.play();
 }
 
 function goCave() {
   update(locations[2]);
+  steps.volume = 0.5;
+  steps.play();
 }
 
 function buyHealth() {
   if (gold >= 10) {
+    buyItem.volume = 0.1;
+    buyItem.play();
     gold -= 10;
     health += 10;
     goldText.innerText = gold;
@@ -142,6 +158,8 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
+      buyItem.volume = 0.1;
+      buyItem.play();
       gold -= 30;
       currentWeapon++;
       goldText.innerText = gold;
@@ -161,6 +179,13 @@ function buyWeapon() {
 
 function sellWeapon() {
   if (inventory.length > 1) {
+    if (buyItem.paused) {
+      buyItem.volume = 0.1;
+      buyItem.play();
+    } else {
+      buyItem.pause();
+      buyItem.currentTime = 0;
+    }
     gold += 15;
     goldText.innerText = gold;
     let currentWeapon = inventory.shift();
@@ -188,6 +213,8 @@ function fightDragon() {
 
 function goFight() {
   update(locations[3]);
+  fight.volume = 0.5;
+  fight.play();
   monsterHealth = monsters[fighting].health;
   monsterStats.style.display = "block";
   monsterName.innerText = monsters[fighting].name;
@@ -195,6 +222,8 @@ function goFight() {
 }
 
 function attack() {
+  atack.volume = 0.5;
+  atack.play();
   text.innerText = monsters[fighting].name + " атакован.";
   text.innerText += " Вы атаковали его " + weapons[currentWeapon].name + ".";
   health -= monsters[fighting].level;
@@ -230,6 +259,8 @@ function dodge() {
 }
 
 function defeatMonster() {
+  killGhoul.volume = 0.2;
+  killGhoul.play();
   gold += Math.floor(monsters[fighting].level * 6.7);
   xp += monsters[fighting].level;
   goldText.innerText = gold;
@@ -239,10 +270,24 @@ function defeatMonster() {
 
 function lose() {
   update(locations[5]);
+  if (soundLose.paused) {
+    soundLose.volume = 0.1;
+    soundLose.play();
+  } else {
+    soundLose.pause();
+    soundLose.currentTime = 0;
+  }
 }
 
 function winGame() {
   update(locations[6]);
+  if (soundWin.paused) {
+    soundWin.volume = 0.1;
+    soundWin.play();
+  } else {
+    soundWin.pause();
+    soundWin.currentTime = 0;
+  }
 }
 
 function restart() {
