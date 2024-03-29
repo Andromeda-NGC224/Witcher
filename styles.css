@@ -4,9 +4,10 @@ body {
   background-size: cover;
   background-position: center;
   font-size: 32px;
-  min-height: 700px;
-  max-height: 800px;
+  width: 100vw;
+  height: 100vh;
   font-family: "Times New Roman", Times, serif;
+  overflow: hidden;
 }
 .button {
   width: 220px;
