@@ -300,4 +300,6 @@ function restart() {
   healthText.innerText = health;
   xpText.innerText = xp;
   goTown();
+  soundWin.pause();
+  soundWin.currentTime = 0;
 }
